@@ -6,8 +6,8 @@ import SignedOutLinks from '../layout/SignedOutLinks';
 const Navbar = () => {
   return ( 
     <nav className="nav-wrapper grey darken-3">
-      <div className="container left">
-        <Link to= "/" className="brand-logo"> Britannia Planner</Link>
+      <div className="container">
+        <Link to= "/" className="brand-logo left"> Britannia Planner</Link>
         <SignedInLinks />
         <SignedOutLinks />
         
