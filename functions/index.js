@@ -23,6 +23,20 @@ admin.initializeApp(functions.config().firebase);
         content : 'Add a new project',
         user : `${project.authorFirstName} ${project.authorLastName}`,
         time: admin.firestore.FieldValue.serverTimestamp()
-      }
-      return createNotification(notification)
+      };
+      return createNotification(notification);
     })
+    
+    exports.userJoined = functions.auth.user()
+      .onCreate(user => {
+        return admin.firestore().collection('users')
+          .doc(user.uid).get().then(doc => {
+            const newUser = doc.data();
+            const notification = {
+              content : 'Joined the chat',
+              user : `${newUser.firstName} ${newUser.lastName}`,
+              time: admin.firestore.FieldValue.serverTimestamp()
+            }
+            return createNotification(notification);
+          })
+      })
